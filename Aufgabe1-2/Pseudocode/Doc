@@ -1,0 +1,43 @@
+insertCard()
+	Invariant:
+		balance >= 0
+	Require:
+		no card inserted
+	this->cardInserted=true
+	Ensure:
+		card inserted now
+	Invariant:
+		balance >=0
+
+withdrawCard()
+	Invariant:
+		balance >=0
+	Require:
+		card inserted now
+	this->cardInserted=false
+	Ensure:
+		no card inserted now
+	Invariant:
+		balance>=0
+		
+depositMoney(double money)
+	Invariant:
+		balance>=0
+	Require:
+		card inserted now
+	this->guthaben+=money
+	Ensure:
+		card inserted now
+	Invariant:
+		balance >=0
+
+withdrawMoney(double money)
+	Invariant:
+		balance>=0
+	Require:
+		card inserted now
+	this->guthaben-=money
+	Ensure:
+		card inserted now
+	Invariant:
+		balance>=0
