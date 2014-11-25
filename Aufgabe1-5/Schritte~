@@ -1,0 +1,15 @@
+1. Schritt: 
+
+Der Bezeichner "gesammtZinsen" enthält einen Schreibfehler, dieser wird behoben.
+
+2. Schritt:
+
+Die Methode Geldautomat::zinsenAusdrucken war zu lang, eine Methode verarbeiteZinsen konnte extrahiert werden.
+
+3. Schritt: 
+
+Der extrahierte Methode wird angepasst: Die Konten werden nun einheitlich über den this Zeiger angesprochen.
+
+4. Schritt:
+
+Es konnte eine weitere Methode extrahiert werden. Die Methode verarbeiteZinsen war zu lang. Aus ihr wurde die Methode getZinsen herausgezogen.
