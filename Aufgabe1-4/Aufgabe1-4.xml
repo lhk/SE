@@ -1,0 +1,18 @@
+<testsuites>
+	<testsuite name="Minimale Termüberdeckung" tests="3">
+		<testcase classname="Minimale Termüberdeckung" name="b1"/>
+		<testcase classname="Minimale Termüberdeckung" name="b2"/>
+		<testcase classname="Minimale Termüberdeckung" name="b3"/>
+	</testsuite>
+	<testsuite name="Vollständige Pfadüberdeckung" tests="9">
+		<testcase classname="Vollständige Pfadüberdeckung" name="path1"/>
+		<testcase classname="Vollständige Pfadüberdeckung" name="path2"/>
+		<testcase classname="Vollständige Pfadüberdeckung" name="path3"/>
+		<testcase classname="Vollständige Pfadüberdeckung" name="path4"/>
+		<testcase classname="Vollständige Pfadüberdeckung" name="path5"/>
+		<testcase classname="Vollständige Pfadüberdeckung" name="path6"/>
+		<testcase classname="Vollständige Pfadüberdeckung" name="path7"/>
+		<testcase classname="Vollständige Pfadüberdeckung" name="path8"/>
+		<testcase classname="Vollständige Pfadüberdeckung" name="path9"/>
+	</testsuite>
+</testsuites>

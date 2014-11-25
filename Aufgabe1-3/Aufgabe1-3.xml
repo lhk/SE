@@ -1,0 +1,12 @@
+<testsuites>
+	<testsuite name="AllTests" tests="4">
+		<testcase classname="AllTests" name="path1"/>
+		<testcase classname="AllTests" name="path2"/>
+		<testcase classname="AllTests" name="path3"/>
+		<testcase classname="AllTests" name="path4">
+			<failure message="../src/Test.cpp:37 path4: Path 3: Z1 Z3 Z5">
+path4: Path 3: Z1 Z3 Z5
+			</failure>
+		</testcase>
+	</testsuite>
+</testsuites>
