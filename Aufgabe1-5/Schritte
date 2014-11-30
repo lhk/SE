@@ -4,7 +4,7 @@ Der Bezeichner "gesammtZinsen" enthält einen Schreibfehler, dieser wird behoben
 
 2. Schritt:
 
-Die Methode Geldautomat::zinsenAusdrucken war zu lang, eine Methode verarbeiteZinsen konnte extrahiert werden.
+Die Methode Geldautomat::zinsenAusdrucken war zu lang, eine Methode Geldautomat::verarbeiteZinsen konnte extrahiert werden.
 
 3. Schritt: 
 
@@ -12,7 +12,7 @@ Der extrahierte Methode wird angepasst: Die Konten werden nun einheitlich über 
 
 4. Schritt:
 
-Es konnte eine weitere Methode extrahiert werden. Die Methode verarbeiteZinsen war zu lang. Aus ihr wurde die Methode getZinsen herausgezogen.
+Es konnte eine weitere Methode extrahiert werden. Die Methode Geldautomat::verarbeiteZinsen war zu lang. Aus ihr wurde die Methode Geldautomat::getZinsen herausgezogen.
 
 5. Schritt:
 
@@ -21,3 +21,16 @@ Die Methode Geldautomat::getZinsen hat nur Attribute der Klasse Konto verwendet 
 6. Schritt:
 
 Die switch-case Anweisung wurde umgangen indem wir das Muster "Zustand" verwendet haben. Die Zinsen werden jetzt polymorph durch eine eigene Klassenhirarchie dargestellt. Jeder Kontotyp entspricht einer Zinsklasse, jede dieser Klassen überschreibt eine rein abstrakte Methode getRate, die den Zinssatz dieses Kontotyps zurückliefert. Dadurch werden die Zinsen die bei einem Konto anfallen übersichtlicher berechnet.
+
+7. Schritt:
+
+Um die Methode zinsenAusdrucken zu überarbeiten und eine HTML basierte Ausführung der Zinsen einzuführen wurden drei neue Klassen erzeugt, die sich am Layout der Vorlesung orientieren. Die Klasse KontoAuszug entspricht der Klasse Statement, sie enthält eine Reihe rein abstrakter Methoden die von Subklassen überschrieben werden müssen, sowie die Methode value(), die einen String mit der Beschreibung der Zinsen zurückliefert.
+Diese Klasse besitzt zwei Subklassen: KontoAuszugText und KontoAuszugHTML.
+Beide enthalten eine Methode headerString() und footerString() mit denen "dekorative" Einbettungen für die eigentlichen Informationen erstellt werden. Bei KontoAuszugText wird dabei der gleiche Text generiert wie bei der bisherigen Methode zinsenAusdrucken. 
+Bei KontoAuszugHTML wird jedoch HTML-Code generiert. Dazu werden <html> und </html> Tags gesetzt und die Informationen etwas aufbereitet.
+Beide greifen in der Methode KontoAuszug::zinsenString auf die Methode Geldautomat::verarbeiteZinsen zurück, die in Schritt 2 erstellt wurde.
+Hier ist ein zur Vorlesung verschiedenes Vorgehen notwendig. In der Vorlesung wurde in der Methode statement() nur eine Beschreibung erstellt. Beim Geldautomat wird jedoch jedesmal wenn die Zinsen dokumentiert werden, gleichzeitig eine Neuberechnung der Zinsen durchgeführt. Es ist hier eine Art impliziter Zeitschritt vorhanden. Offensichtlich geht man davon aus, dass ein KontoAuszug einmal monatlich erstellt wird und hat deshalb die Programmlogik zur Zinsberechnung mit der Programmlogik zur Zinsdokumentation zusammengelegt.
+Diese Entscheidung ist kein guter Programmierstil. "side-effects" sollten stets vermieden werden. 
+Allerdings wird dieses Verhalten durch die Tests abgedeckt und ist scheinbar gewünscht. Unsere Aufgabe verbietet es strikt, die Interfaces der Klassen zu verändern. Deshalb haben wir uns entschieden die Funktionalität zur Berechnung der Zinsen nicht aus der Methode zinsenAusdrucken zu extrahieren. Diese Funktionalität müsste dann nämlich im gesamten Rest des Programmcodes ebenfalls angepasst werden, eine radikale Veränderung des Interfaces. Stattdessen haben wir in Schritt 2 die Methode Geldautomat::verarbeiteZinsen extrahiert, die bereits durch ihren Namen darauf hinweist, dass nicht nur Text produziert wird.
+Im Unterschied zur Klasse Statement ist es also nicht möglich, die gesamte Funktionalität von zinsenAusdrucken aus dem Geldautomat zu entfernen. Geldautomat::gesamtZinsen muss immer noch angepasst werden. Es macht Sinn diese Funktionalität im Geldautomat zu belassen, schließlich handelt es sich dabei um höchst sensible Daten. Leider können wegen dieser Zustandsänderung wärend der Zinsberechnung keine konstanten Referenzen auf Geldautomaten in den Methoden der KontoAuszug Klassen verwendet werden. 
+Wir haben also die Zugriffsrechte der Attribute von Geldautomat angepasst und rufen verarbeiteZinsen von den KontoAuszug-Subklassen aus auf.

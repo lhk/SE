@@ -13,3 +13,11 @@ Der extrahierte Methode wird angepasst: Die Konten werden nun einheitlich über 
 4. Schritt:
 
 Es konnte eine weitere Methode extrahiert werden. Die Methode verarbeiteZinsen war zu lang. Aus ihr wurde die Methode getZinsen herausgezogen.
+
+5. Schritt:
+
+Die Methode Geldautomat::getZinsen hat nur Attribute der Klasse Konto verwendet und konnte deshalb in die Klasse Konto verschoben werden.
+
+6. Schritt:
+
+Die switch-case Anweisung wurde umgangen indem wir das Muster "Zustand" verwendet haben. Die Zinsen werden jetzt polymorph durch eine eigene Klassenhirarchie dargestellt. Jeder Kontotyp entspricht einer Zinsklasse, jede dieser Klassen überschreibt eine rein abstrakte Methode getRate, die den Zinssatz dieses Kontotyps zurückliefert. Dadurch werden die Zinsen die bei einem Konto anfallen übersichtlicher berechnet.
