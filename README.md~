@@ -1,0 +1,4 @@
+SE
+==
+
+homework for se
